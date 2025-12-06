@@ -2,63 +2,61 @@
 "A Python CLI tool to calculate neutron thermalization collisions and lethargy with stochastic error analysis. Supports Light Water, Heavy Water, and Graphite."
 # Neutron Thermalization Calculator ⚛️
 
-A Python-based CLI tool to calculate the number of collisions required to slow down (moderate) fast neutrons to thermal energy levels using Fermi Age Theory approximations.
+![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Topic](https://img.shields.io/badge/Physics-Nuclear%20Engineering-orange)
+
+A Python-based command-line tool designed to simulate and calculate the moderation (slowing down) process of fast neutrons in a nuclear reactor environment. It utilizes **Fermi Age Theory** approximations to estimate the number of collisions required to reach thermal energy levels.
+
+Unlike simple calculators, this tool includes a **stochastic error analysis**, providing a standard deviation to account for the probabilistic nature of neutron scattering.
 
 ## 🚀 Features
 
-* **Multi-Moderator Support:** Calculate for Light Water ($H_2O$), Heavy Water ($D_2O$), and Graphite ($C$).
-* **Stochastic Analysis:** Unlike simple calculators, this tool provides a **Standard Deviation** ($\sigma$) to account for the probabilistic nature of neutron scattering.
-* **Lethargy Calculation:** Computes the logarithmic energy decrement based on input MeV.
-* **Safety Checks:** Includes input validation and boundary checks for energy levels.
+* **Multi-Moderator Support:** Built-in data for:
+    * Light Water ($H_2O$)
+    * Heavy Water ($D_2O$)
+    * Graphite ($C$)
+* **Lethargy Calculation:** Computes the total logarithmic energy decrement required.
+* **Statistical Error Analysis:** Calculates the Standard Deviation ($\sigma$) and confidence intervals for the collision count.
+* **Input Validation:** Ensures physical constraints (e.g., Target Energy < Initial Energy) are met.
 
-## 📋 Prerequisites
+## 🛠️ Installation & Usage
 
-* Python 3.x
-
-## 🔧 Installation & Usage
-
-1.  Clone the repository:
+1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/KULLANICI_ADIN/Neutron-Thermalization-Calculator.git](https://github.com/KULLANICI_ADIN/Neutron-Thermalization-Calculator.git)
+    git clone [https://github.com/YOUR_USERNAME/Neutron-Thermalization-Calculator.git](https://github.com/YOUR_USERNAME/Neutron-Thermalization-Calculator.git)
     ```
-2.  Navigate to the directory:
+
+2.  **Navigate to the directory:**
     ```bash
     cd Neutron-Thermalization-Calculator
     ```
-3.  Run the script:
+
+3.  **Run the script:**
     ```bash
     python main.py
     ```
 
-## 🧠 Physics Background & Error Analysis
+## 💻 Example Output
 
-### Why is there an "Error Margin" (Standard Deviation)?
+```text
+Please select a moderator:
+1. Light Water (H2O) [High scattering, high uncertainty]
+2. Heavy Water (D2O) [Low absorption, medium uncertainty]
+3. Graphite (C)      [Stable slowing down, low uncertainty]
 
-Neutron moderation is a **stochastic (probabilistic)** process, not a deterministic one. 
+Your Selection (1/2/3): 1
 
-1.  **Random Nature of Scattering:** When a neutron hits a nucleus, the energy loss depends on the scattering angle. A neutron might lose a lot of energy in a "head-on" collision or very little in a "glancing" blow.
-2.  **The Statistical Spread:** The calculated number of collisions ($n$) is merely an **average**. 
-    * For light nuclei (like Hydrogen in $H_2O$), the variance is high because a single collision can dramatically change the neutron's energy.
-    * For heavy nuclei (like Carbon in Graphite), the process is more gradual and "stable," resulting in a lower standard deviation.
+Enter initial neutron energy (MeV) [e.g., 2]: 2
 
-This tool calculates the **Standard Deviation ($\sigma$)** using the approximation:
-
-$$ \sigma \approx \sqrt{\frac{2}{3A} \cdot n} $$
-
-Where $A$ is the atomic mass number and $n$ is the average number of collisions. The tool gives you a confidence interval where ~68% of neutrons will fall.
-
-### Key Formulas Used
-
-* **Lethargy ($u$):**
-    $$ u = \ln \left( \frac{E_0}{E_{thermal}} \right) $$
-    
-* **Average Number of Collisions ($n$):**
-    $$ n = \frac{u}{\xi} $$
-    *(Where $\xi$ is the average logarithmic energy decrement per collision)*
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-*Developed for educational purposes in Nuclear Engineering.*
+========================================
+MODERATOR: Light Water (H2O)
+Energy Change: 2.0 MeV -> 0.025 eV
+----------------------------------------
+AVG. NUMBER OF COLLISIONS : 19.8
+STANDARD DEVIATION (Error): +/- 3.63 collisions
+----------------------------------------
+ANALYSIS:
+Most neutrons will reach thermal energy levels
+between 16 and 24 collisions.
+========================================
